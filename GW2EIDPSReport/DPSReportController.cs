@@ -248,6 +248,14 @@ namespace GW2EIDPSReport
                             throw new InvalidOperationException(item.Error);
                         }
                         traces.Add("Upload tentative successful");
+                        // Added file output for uploaded objects
+                        string nameOfFile = "dpsReport-links.txt";
+                        string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        using (StreamWriter outputFile = File.AppendText(Path.Combine(docPath, nameOfFile)))
+                        {
+                            outputFile.WriteLine($"{item.Permalink}");
+                        }
+                        // End addition
                         return item;
                     }
                 }
